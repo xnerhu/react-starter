@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="pl">
+    <meta charset="UTF-8" />
+    <title>Wexond</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        if (process.env.ENV == 'dev') {
+            function loadScripts(array) {
+                var loader = function(src, handler) {
+                    var script = document.createElement("script");
+                    script.src = src;
+                    script.onload = script.onreadystatechange = function() {
+                        script.onreadystatechange = script.onload = null;
+                        handler();
+                    }
+                    var head = document.getElementsByTagName("head")[0];
+                    (head || document.body).appendChild(script);
+                };
+                (function run() {
+                    if (array.length != 0) {
+                        loader(array.shift(), run);
+                    }
+                })();
+            }
+            loadScripts(['http://localhost:8080/build/entry.bundle.js', 'http://localhost:8080/webpack-dev-server.js']);
+        } else {
+            require('../../../build/entry.bundle.js');
+        }
+    </script>
+</body>
+
+</html>

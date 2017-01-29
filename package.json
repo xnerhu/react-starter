@@ -1,0 +1,44 @@
+{
+    "name": "react-starter",
+    "version": "0.0.1",
+    "license": "MIT",
+    "description": "Just a simple description",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nersent/react-starter.git"
+    },
+    "devDependencies": {
+        "asar": "latest",
+        "babel-core": "latest",
+        "babel-loader": "latest",
+        "cross-env": "latest",
+        "css-loader": "latest",
+        "electron-packager": "latest",
+        "eslint": "latest",
+        "eslint-loader": "latest",
+        "json-loader": "latest",
+        "webpack": "latest",
+        "webpack-dev-server": "latest"
+    },
+    "dependencies": {
+        "babel-preset-es2015": "latest",
+        "babel-preset-react": "latest",
+        "electron": "latest",
+        "react": "latest",
+        "react-dom": "latest"
+    },
+    "bugs": {
+        "url": "https://github.com/nersent/react-starter/issues"
+    },
+    "homepage": "https://github.com/nersent/react-starter#readme",
+    "main": "build/main.bundle.js",
+    "scripts": {
+        "start": "cross-env NODE_ENV=dev electron build/main.bundle.js",
+        "watch": "webpack && webpack-dev-server --hot --inline --port 8080"
+    },
+    "keywords": [
+        "react",
+        "starter"
+    ],
+    "author": "Nersent"
+}
