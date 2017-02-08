@@ -29,7 +29,7 @@ function createWindow() {
 
     });
 
-    if (process.env.ENV == 'dev') {
+    if (process.env.NODE_ENV == 'dev') {
         mainWindow.webContents.openDevTools();
     }
 }

@@ -9,7 +9,7 @@
 <body>
     <div id="app"></div>
     <script>
-        if (process.env.ENV == 'dev') {
+        if (process.env.NODE_ENV == 'dev') {
             function loadScripts(array) {
                 var loader = function(src, handler) {
                     var script = document.createElement("script");
