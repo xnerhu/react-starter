@@ -1,8 +1,9 @@
 {
     "name": "react-starter",
-    "version": "0.0.1",
+    "main":"main.js",
+    "version": "0.0.2",
     "license": "MIT",
-    "description": "React and Electron starter app for everyone. This project has no license, it's free to use.",
+    "description": "React and Electron starter app for everyone.",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/nersent/react-starter.git"
@@ -14,9 +15,10 @@
         "cross-env": "latest",
         "css-loader": "latest",
         "electron-packager": "latest",
-        "json-loader": "latest",
         "webpack": "latest",
-        "webpack-dev-server": "latest"
+        "webpack-dev-server": "latest",
+        "babel-plugin-transform-class-properties": "latest",
+        "babel-preset-stage-0": "latest"
     },
     "dependencies": {
         "babel-preset-es2015": "latest",
@@ -29,9 +31,9 @@
         "url": "https://github.com/nersent/react-starter/issues"
     },
     "homepage": "https://github.com/nersent/react-starter#readme",
-    "main": "build/main.bundle.js",
+    "main": "main.js",
     "scripts": {
-        "start": "cross-env NODE_ENV=dev electron build/main.bundle.js",
+        "start": "cross-env ENV=dev electron main.js",
         "watch": "webpack && webpack-dev-server --hot --inline --port 8080"
     },
     "keywords": [

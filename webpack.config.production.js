@@ -5,8 +5,7 @@ module.exports = {
     target: "electron",
     devtool: "eval-source-map",
     entry: {
-        entry: './app/renderer/entry.js',
-        main: './app/main/main.js'
+        entry: './app/entry.js'
     },
     node: {
         __dirname: false,
@@ -14,7 +13,7 @@ module.exports = {
     },
 
     output: {
-        path: path.join(__dirname, 'build'),
+        path: path.join(__dirname, 'dist'),
         filename: "[name].bundle.js"
     },
 
@@ -27,26 +26,34 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                include: path.resolve(__dirname, "app/renderer/public"),
+                include: path.resolve(__dirname, "app/public"),
                 use: ['style-loader', 'css-loader']
             }, {
                 test: /(\.js$|\.jsx$)/,
                 include: path.resolve(__dirname, "app"),
-                use: [{
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['react', 'es2015']
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['react', 'es2015', 'stage-0']
+                        }
                     }
-                }]
+                ]
             }
         ]
     },
 
     plugins: [
-        /* TODO: UglifyJs is not working with Babel 6 new webpack.optimize.UglifyJsPlugin() */
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
-        })
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: true,
+            compress: {
+                warnings: false
+            },
+            output: {
+                comments: false
+            }
+        }),
+        new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('production')})
     ],
 
     resolve: {

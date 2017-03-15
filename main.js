@@ -19,7 +19,7 @@ app.on('activate', function () {
 
 function createWindow() {
     mainWindow = new BrowserWindow({width: 900, height: 700, frame: false, minWidth: 300, minHeight: 430});
-    mainWindow.loadURL('file://' + __dirname + '/../app/renderer/public/index.html');
+    mainWindow.loadURL('file://' + __dirname + '/app/public/index.html');
     mainWindow.setMenu(null);
 
     mainWindow.on('closed', () => {
