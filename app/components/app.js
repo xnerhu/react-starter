@@ -1,20 +1,13 @@
-'use babel';
-import React from 'react';
+import React from 'react'
+
+import '../public/scss/app.scss'
 
 export default class App extends React.Component {
-    constructor() {
-        super();
-    }
-
-    componentDidMount() {
-
-    }
-
-    render() {
-        return (
-            <div>
-                Hello world!
-            </div>
-        );
-    }
+  render () {
+    return (
+      <div>
+        Hello world!
+      </div>
+    )
+  }
 }

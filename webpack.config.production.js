@@ -1,63 +1,85 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
-    target: "electron",
-    devtool: "eval-source-map",
-    entry: {
-        entry: './app/entry.js'
-    },
-    node: {
-        __dirname: false,
-        __filename: false
-    },
+  target: 'electron',
+  devtool: 'eval-source-map',
+  entry: {
+    entry: './app/entry.js'
+  },
+  node: {
+    __dirname: false,
+    __filename: false
+  },
 
-    output: {
-        path: path.join(__dirname, 'dist'),
-        filename: "[name].bundle.js"
-    },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].bundle.js'
+  },
 
-    devServer: {
-        contentBase: './',
-        publicPath: 'http://localhost:8080/build/'
-    },
+  devServer: {
+    contentBase: './',
+    publicPath: 'http://localhost:8080/dist/'
+  },
 
-    module: {
-        rules: [
-            {
-                test: /\.css$/,
-                include: path.resolve(__dirname, "app/public"),
-                use: ['style-loader', 'css-loader']
-            }, {
-                test: /(\.js$|\.jsx$)/,
-                include: path.resolve(__dirname, "app"),
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['react', 'es2015', 'stage-0']
-                        }
-                    }
-                ]
+  module: {
+    rules: [
+      {
+        test: /\.(scss)$/,
+        include: path.resolve(__dirname, 'app/public'),
+        use: [
+          {
+            loader: 'style-loader'
+          }, {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
             }
+          }, {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
         ]
-    },
-
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            compress: {
-                warnings: false
-            },
-            output: {
-                comments: false
+      }, {
+        test: /\.(png|gif|jpg|woff2|tff)$/,
+        include: path.resolve(__dirname, 'app/public'),
+        use: [
+          {
+            loader: 'url-loader'
+          }
+        ]
+      }, {
+        test: /\.(js|jsx)$/,
+        include: path.resolve(__dirname, 'app'),
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['react', 'es2015', 'stage-0']
             }
-        }),
-        new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('production')})
-    ],
+          }
+        ]
+      }
+    ]
+  },
 
-    resolve: {
-        modules: ['node_modules'],
-        extensions: ['.js', '.jsx']
-    }
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      },
+      output: {
+        comments: false
+      }
+    }),
+    new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('production')})
+  ],
+
+  resolve: {
+    modules: ['node_modules'],
+    extensions: ['.js', '.jsx']
+  }
 }
