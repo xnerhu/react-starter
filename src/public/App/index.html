@@ -15,9 +15,9 @@
             document.body.appendChild(script)
           }
         }
-        loadScripts(['http://localhost:8080/dist/entry.bundle.js', 'http://localhost:8080/webpack-dev-server.js']);
+        loadScripts(['http://localhost:8080/build/app.bundle.js', 'http://localhost:8080/webpack-dev-server.js']);
       } else {
-        require('../../../dist/entry.bundle.js');
+        require('../../../build/app.bundle.js');
       }
     </script>
   </body>

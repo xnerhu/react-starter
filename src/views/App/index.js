@@ -1,6 +1,7 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 
-import '../public/scss/app.scss'
+import '../../app.scss'
 
 export default class App extends React.Component {
   render () {
@@ -11,3 +12,5 @@ export default class App extends React.Component {
     )
   }
 }
+
+ReactDOM.render(<App />, document.getElementById('app'))

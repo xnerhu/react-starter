@@ -5,7 +5,7 @@ module.exports = {
   target: 'electron',
   devtool: 'eval-source-map',
   entry: {
-    entry: './app/entry.js'
+    app: './src/views/App/index.js'
   },
   node: {
     __dirname: false,
@@ -13,13 +13,13 @@ module.exports = {
   },
 
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'build'),
     filename: '[name].bundle.js'
   },
 
   devServer: {
     contentBase: './',
-    publicPath: 'http://localhost:8080/dist/'
+    publicPath: 'http://localhost:8080/build/'
   },
 
   module: {

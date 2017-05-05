@@ -17,7 +17,7 @@ app.on('activate', function () {
 
 function createWindow () {
   mainWindow = new BrowserWindow({width: 900, height: 700, frame: false, minWidth: 300, minHeight: 430})
-  mainWindow.loadURL(path.join('file://', __dirname, '/app/public/index.html'))
+  mainWindow.loadURL(path.join('file://', __dirname, '/src/public/App/index.html'))
   mainWindow.setMenu(null)
 
   mainWindow.on('closed', () => {
