@@ -1,5 +1,5 @@
-var {app, BrowserWindow} = require('electron')
-var path = require('path')
+const {app, BrowserWindow} = require('electron')
+const path = require('path')
 
 let mainWindow
 
@@ -9,33 +9,34 @@ app.on('window-all-closed', () => {
   }
 })
 
-app.on('activate', function () {
+app.on('activate', () => {
   if (mainWindow == null) {
     createWindow()
   }
 })
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 900, height: 700, frame: false, minWidth: 300, minHeight: 430})
-  mainWindow.loadURL(path.join('file://', __dirname, '/src/public/App/index.html'))
+  mainWindow = new BrowserWindow({width: 900, height: 700})
+  mainWindow.loadURL(path.join('file://', __dirname, '/src/public/app/index.html'))
   mainWindow.setMenu(null)
 
   mainWindow.on('closed', () => {
     mainWindow = null
   })
 
-  mainWindow.on('unresponsive', function () {
+  mainWindow.on('unresponsive', () => {
 
   })
 
-  if (process.env.ENV === 'dev') {
+  if (process.env.NODE_ENV === 'dev') {
     mainWindow.webContents.openDevTools()
   }
 }
-process.on('uncaughtException', function () {
 
+process.on('uncaughtException', (e) => {
+  console.error(e)
 })
 
-app.on('ready', function () {
+app.on('ready', () => {
   createWindow()
 })

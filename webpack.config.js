@@ -1,19 +1,16 @@
-const path = require('path')
+const { join } = require('path')
 const webpack = require('webpack')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
-module.exports = {
-  target: 'electron',
+let config = {
   devtool: 'eval-source-map',
+
   entry: {
-    app: './src/views/App/index.js'
-  },
-  node: {
-    __dirname: false,
-    __filename: false
+    'app': './src/bootstrap.jsx'
   },
 
   output: {
-    path: path.join(__dirname, 'build'),
+    path: join(__dirname, 'build'),
     filename: '[name].bundle.js'
   },
 
@@ -26,7 +23,8 @@ module.exports = {
     rules: [
       {
         test: /\.(scss)$/,
-        include: path.resolve(__dirname, 'src'),
+        include: join(__dirname, 'src'),
+        exclude: /node_modules/,
         use: [
           {
             loader: 'style-loader'
@@ -44,21 +42,20 @@ module.exports = {
         ]
       }, {
         test: /\.(png|gif|jpg|woff2|tff)$/,
-        include: path.resolve(__dirname, 'src'),
+        include: join(__dirname, 'src'),
+        exclude: /node_modules/,
         use: [
           {
             loader: 'url-loader'
           }
         ]
       }, {
-        test: /\.(js|jsx)$/,
-        include: path.resolve(__dirname, 'src'),
+        test: /\.(jsx)$/,
+        include: join(__dirname, 'src'),
+        exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
-            options: {
-              presets: ['react', 'es2015', 'stage-0']
-            }
+            loader: 'babel-loader'
           }
         ]
       }
@@ -66,7 +63,11 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
   ],
 
   resolve: {
@@ -74,3 +75,20 @@ module.exports = {
     extensions: ['.js', '.jsx']
   }
 }
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(new UglifyJSPlugin({
+    uglifyOptions: {
+      compress: {
+        warnings: false,
+      },
+      output: {
+        comments: false
+      }
+    }
+  }))
+  config.plugins.push()
+  config.devtool = 'cheap-module-source-map'
+}
+
+module.exports = config

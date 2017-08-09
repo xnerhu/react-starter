@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head lang="pl">
+  <head>
     <meta charset="UTF-8" />
-    <title>Wexond</title>
+    <title>electron-react-starter</title>
   </head>
   <body>
     <div id="app"></div>
+    <script src="../../utils/dom.js"></script>
     <script>
-      if (process.env.ENV === 'dev') {
-        function loadScripts (arr) {
-          for (var i = 0; i < arr.length; i++) {
-            var script = document.createElement('script')
-            script.src = arr[i]
-            document.body.appendChild(script)
-          }
-        }
+      if (process.env.NODE_ENV === 'dev') {
         loadScripts(['http://localhost:8080/build/app.bundle.js', 'http://localhost:8080/webpack-dev-server.js']);
       } else {
-        require('../../../build/app.bundle.js');
+        loadScripts(['../../../build/app.bundle.js'])
       }
     </script>
   </body>
