@@ -1,7 +1,15 @@
 {
   "presets": [
-    "es2017",
-    "stage-0",
+    ["env",{
+      "targets": {
+        "browser": "last 2 versions"
+      }
+    }],
     "react"
-  ]
+  ],
+  "plugins": [
+    "transform-class-properties",
+    "transform-runtime"
+  ],
+  "retainLines": true
 }
