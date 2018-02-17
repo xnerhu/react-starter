@@ -1,29 +1,30 @@
 const { join } = require('path')
 const webpack = require('webpack')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJSWebpackPlugin = require('uglifyjs-webpack-plugin')
+
+const productionDevtool = 'cheap-module-source-map'
+const developmentDevtool = 'cheap-module-eval-source-map'
+
+const include = [join(__dirname, 'src')]
 
 let config = {
-  devtool: 'eval-source-map',
-
-  entry: {
-    'app': './src/bootstrap.jsx'
-  },
-
-  output: {
-    path: join(__dirname, 'build'),
-    filename: '[name].bundle.js'
-  },
+  devtool: (process.env.NODE_ENV === 'production') ? productionDevtool : developmentDevtool,
 
   devServer: {
     contentBase: './',
     publicPath: 'http://localhost:8080/build/'
   },
 
+  output: {
+    path: join(__dirname, 'build'),
+    filename: 'index.js'
+  },
+
   module: {
     rules: [
       {
         test: /\.(scss)$/,
-        include: join(__dirname, 'src'),
+        include: include,
         exclude: /node_modules/,
         use: [
           {
@@ -41,8 +42,8 @@ let config = {
           }
         ]
       }, {
-        test: /\.(png|gif|jpg|woff2|tff)$/,
-        include: join(__dirname, 'src'),
+        test: /\.(png|gif|jpg|woff2|tff|svg)$/,
+        include: include,
         exclude: /node_modules/,
         use: [
           {
@@ -50,8 +51,8 @@ let config = {
           }
         ]
       }, {
-        test: /\.(jsx)$/,
-        include: join(__dirname, 'src'),
+        test: /\.(jsx|js)$/,
+        include: include,
         exclude: /node_modules/,
         use: [
           {
@@ -62,13 +63,7 @@ let config = {
     ]
   },
 
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    })
-  ],
+  plugins: [],
 
   resolve: {
     modules: ['node_modules'],
@@ -77,18 +72,27 @@ let config = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  config.plugins.push(new UglifyJSPlugin({
+  config.plugins.push(new UglifyJSWebpackPlugin({
     uglifyOptions: {
-      compress: {
-        warnings: false,
-      },
       output: {
         comments: false
       }
     }
   }))
-  config.plugins.push()
-  config.devtool = 'cheap-module-source-map'
+  config.plugins.push(new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': JSON.stringify('production')
+    }
+  }))
 }
 
-module.exports = config
+let appConfig = {
+  target: 'web',
+  entry: {
+    example: './src/bootstraps/bootstrap.jsx'
+  }
+}
+
+appConfig = Object.assign(appConfig, config)
+
+module.exports = [appConfig]
