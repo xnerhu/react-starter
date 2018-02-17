@@ -30,15 +30,9 @@ let config = {
           {
             loader: 'style-loader'
           }, {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
+            loader: 'css-loader'
           }, {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
+            loader: 'sass-loader'
           }
         ]
       }, {
@@ -89,7 +83,7 @@ if (process.env.NODE_ENV === 'production') {
 let appConfig = {
   target: 'web',
   entry: {
-    app: './src/bootstraps/bootstrap.jsx'
+    app: './src/bootstraps/app.jsx'
   }
 }
 
