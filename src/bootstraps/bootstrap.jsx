@@ -1,9 +1,9 @@
-import './app.scss'
+import '../app.scss'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import App from './components/App'
+import App from '../components/App'
 
 // Wait for styles to load.
 setTimeout(() => {

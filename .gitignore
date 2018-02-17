@@ -2,4 +2,3 @@
 *.log.*
 build
 node_modules
-dist*

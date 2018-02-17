@@ -2,8 +2,8 @@ const { join } = require('path')
 const webpack = require('webpack')
 const UglifyJSWebpackPlugin = require('uglifyjs-webpack-plugin')
 
-const productionDevtool = 'cheap-module-source-map'
-const developmentDevtool = 'cheap-module-eval-source-map'
+const productionDevtool = 'source-map'
+const developmentDevtool = 'eval-source-map'
 
 const include = [join(__dirname, 'src')]
 
@@ -12,12 +12,12 @@ let config = {
 
   devServer: {
     contentBase: './',
-    publicPath: 'http://localhost:8080/build/'
+    publicPath: 'http://localhost:8181/build/'
   },
 
   output: {
     path: join(__dirname, 'build'),
-    filename: 'index.js'
+    filename: '[name].bundle.js'
   },
 
   module: {
@@ -89,7 +89,7 @@ if (process.env.NODE_ENV === 'production') {
 let appConfig = {
   target: 'web',
   entry: {
-    example: './src/bootstraps/bootstrap.jsx'
+    app: './src/bootstraps/bootstrap.jsx'
   }
 }
 
