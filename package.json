@@ -10,7 +10,8 @@
   "scripts": {
     "watch": "webpack-dev-server --hot --inline --color --progress",
     "build:dev": "webpack --progress --color",
-    "build:production": "cross-env NODE_ENV=production webpack --progress --color --define process.env.NODE_ENV='production'"
+    "build:production":
+      "cross-env NODE_ENV=production webpack --progress --color --define process.env.NODE_ENV='production'"
   },
   "devDependencies": {
     "@types/node": "9.4.6",
@@ -36,11 +37,6 @@
     "url": "https://github.com/nersent/react-starter/issues"
   },
   "homepage": "https://github.com/nersent/react-starter#readme",
-  "keywords": [
-    "react",
-    "starter",
-    "webpack",
-    "typescript"
-  ],
+  "keywords": ["react", "starter", "webpack", "typescript"],
   "author": "Nersent"
 }
