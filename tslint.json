@@ -1,0 +1,9 @@
+{
+  "extends": ["tslint:latest"],
+  "rules": {
+    "import-name": false,
+    "no-increment-decrement": false,
+    "no-implicit-dependencies": false,
+    "no-empty": false
+  }
+}

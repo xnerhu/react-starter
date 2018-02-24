@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from "react";
 
 class App extends React.Component<{}, {}> {
-  render() {
+  public render() {
     return <div>Hello world!</div>;
   }
 }

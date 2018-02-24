@@ -12,10 +12,10 @@
 
   <script>
     (function () {
-      if (window.location.href.startsWith('http://localhost')) {
-        loadScripts(['../../build/app.bundle.js']);
+      if (window.location.href.startsWith("http://localhost")) {
+        loadScripts(["../../build/app.bundle.js"]);
       } else {
-        loadScripts(['http://localhost:8080/build/app.bundle.js', 'http://localhost:8080/webpack-dev-server.js']);
+        loadScripts(["http://localhost:8080/build/app.bundle.js", "http://localhost:8080/webpack-dev-server.js"]);
       }
     })();
   </script>

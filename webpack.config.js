@@ -1,27 +1,30 @@
-const { join } = require('path');
-const webpack = require('webpack');
-const UglifyJSWebpackPlugin = require('uglifyjs-webpack-plugin');
+const { join } = require("path");
+const webpack = require("webpack");
+const UglifyJSWebpackPlugin = require("uglifyjs-webpack-plugin");
 
-const productionDevtool = 'source-map';
-const developmentDevtool = 'eval-source-map';
+const productionDevtool = "source-map";
+const developmentDevtool = "eval-source-map";
 
-const include = [join(__dirname, 'src')];
+const include = [join(__dirname, "src")];
 const exclude = /node_modules/;
 
 const port = 8080;
 
 const config = {
-  devtool: process.env.NODE_ENV === 'production' ? productionDevtool : developmentDevtool,
+  devtool:
+    process.env.NODE_ENV === "production"
+      ? productionDevtool
+      : developmentDevtool,
 
   devServer: {
     port,
-    contentBase: './',
+    contentBase: "./",
     publicPath: `http://localhost:${port}/build/`,
   },
 
   output: {
-    path: join(__dirname, 'build'),
-    filename: '[name].bundle.js',
+    path: join(__dirname, "build"),
+    filename: "[name].bundle.js",
   },
 
   module: {
@@ -32,7 +35,7 @@ const config = {
         exclude,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
           },
         ],
       },
@@ -42,7 +45,7 @@ const config = {
         exclude,
         use: [
           {
-            loader: 'ts-loader',
+            loader: "ts-loader",
           },
         ],
       },
@@ -52,12 +55,12 @@ const config = {
   plugins: [],
 
   resolve: {
-    modules: ['node_modules'],
-    extensions: ['.js', '.tsx', '.ts'],
+    modules: ["node_modules"],
+    extensions: [".js", ".tsx", ".ts"],
   },
 };
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   config.plugins.push(
     new UglifyJSWebpackPlugin({
       uglifyOptions: {
@@ -67,17 +70,17 @@ if (process.env.NODE_ENV === 'production') {
       },
     }),
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
+      "process.env": {
+        NODE_ENV: JSON.stringify("production"),
       },
     }),
   );
 }
 
 let appConfig = {
-  target: 'web',
+  target: "web",
   entry: {
-    app: './src/bootstraps/app',
+    app: "./src/bootstraps/app",
   },
 };
 
