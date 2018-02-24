@@ -8,20 +8,16 @@
 
 <body>
   <div id="app"></div>
-  <script>
-    function loadScripts(scripts) {
-      for (let i = 0; i < scripts.length; i++) {
-        let script = document.createElement('script')
-        script.src = scripts[i]
-        document.body.appendChild(script)
-      }
-    }
+  <script src="./load-scripts.js"></script>
 
-    if (window.location.href.startsWith("http://localhost")) {
-      loadScripts(['http://localhost:8181/build/app.bundle.js', 'http://localhost:8181/webpack-dev-server.js']);
-    } else {
-      loadScripts(['../../build/app.bundle.js'])
-    }
+  <script>
+    (function () {
+      if (window.location.href.startsWith('http://localhost')) {
+        loadScripts(['../../build/app.bundle.js']);
+      } else {
+        loadScripts(['http://localhost:8080/build/app.bundle.js', 'http://localhost:8080/webpack-dev-server.js']);
+      }
+    })();
   </script>
 </body>
 

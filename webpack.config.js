@@ -8,6 +8,8 @@ const developmentDevtool = "eval-source-map";
 const include = [join(__dirname, "src")];
 const exclude = /node_modules/;
 
+const port = 8080;
+
 const config = {
   devtool:
     process.env.NODE_ENV === "production"
@@ -15,13 +17,14 @@ const config = {
       : developmentDevtool,
 
   devServer: {
+    port,
     contentBase: "./",
-    publicPath: "http://localhost:8181/build/"
+    publicPath: `http://localhost:${port}/build/`,
   },
 
   output: {
     path: join(__dirname, "build"),
-    filename: "[name].bundle.js"
+    filename: "[name].bundle.js",
   },
 
   module: {
@@ -32,9 +35,9 @@ const config = {
         exclude,
         use: [
           {
-            loader: "file-loader"
-          }
-        ]
+            loader: "file-loader",
+          },
+        ],
       },
       {
         test: /\.(tsx|ts)$/,
@@ -42,11 +45,11 @@ const config = {
         exclude,
         use: [
           {
-            loader: "ts-loader"
-          }
-        ]
-      }
-    ]
+            loader: "ts-loader",
+          },
+        ],
+      },
+    ],
   },
 
   plugins: [],
@@ -54,10 +57,7 @@ const config = {
   resolve: {
     modules: ["node_modules"],
     extensions: [".js", ".tsx", ".ts"],
-    alias: {
-      react: join(__dirname, "node_modules", "react")
-    }
-  }
+  },
 };
 
 if (process.env.NODE_ENV === "production") {
@@ -65,27 +65,25 @@ if (process.env.NODE_ENV === "production") {
     new UglifyJSWebpackPlugin({
       uglifyOptions: {
         output: {
-          comments: false
-        }
-      }
-    })
-  );
-  config.plugins.push(
+          comments: false,
+        },
+      },
+    }),
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify("production")
-      }
-    })
+        NODE_ENV: JSON.stringify("production"),
+      },
+    }),
   );
 }
 
 let appConfig = {
   target: "web",
   entry: {
-    app: "./src/bootstraps/app"
-  }
+    app: "./src/bootstraps/app",
+  },
 };
 
-appConfig = Object.assign(appConfig, config);
+appConfig = Object.assign(config, appConfig);
 
 module.exports = [appConfig];

@@ -1,0 +1,9 @@
+{
+  "parser": "typescript-eslint-parser",
+  "extends": "airbnb",
+  "rules": {
+    "linebreak-style": "off",
+    "no-plusplus": "off"
+  },
+  "plugins": ["react", "import", "jsx-a11y"]
+}
