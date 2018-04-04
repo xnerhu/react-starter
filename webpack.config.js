@@ -30,6 +30,26 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.(scss)$/,
+        include: join(__dirname, 'src'),
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader'
+          }, {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          }, {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      },
+      {
         test: /\.(png|gif|jpg|woff2|tff|svg)$/,
         include,
         exclude,

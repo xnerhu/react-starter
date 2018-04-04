@@ -5,5 +5,3 @@ function loadScripts(scripts) {
     document.body.appendChild(script);
   }
 }
-
-module.exports = { loadScripts };

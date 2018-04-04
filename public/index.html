@@ -7,13 +7,26 @@
 </head>
 
 <body>
+  <noscript>
+    <h3>
+      Can't display the page.
+    </h3>
+    <h4>
+      Your browser doesnt't support JavaScript or it's disabled.
+      <br />
+      Change to another browser or check the settings.
+    </h4>
+  </noscript>
+
   <div id="app"></div>
   <script src="./load-scripts.js"></script>
 
   <script>
     (function () {
-      if (window.location.href.startsWith("http://localhost")) {
-        loadScripts(["../../build/app.bundle.js"]);
+      const location = window.location.href;
+
+      if (!location.startsWith("http://localhost") || location.startsWith("file:///")) {
+        loadScripts(["build/app.bundle.js"]);
       } else {
         loadScripts(["http://localhost:8080/build/app.bundle.js", "http://localhost:8080/webpack-dev-server.js"]);
       }
